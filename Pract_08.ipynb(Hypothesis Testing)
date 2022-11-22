@@ -1,0 +1,181 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNPgrCyuDvpZ2whZ9Y4MVVa",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Manalibhaskar07/MSC_FDS_528/blob/main/Pract_08.ipynb(Hypothesis%20Testing)\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "id": "Lz8Lz4gpu33B"
+      },
+      "outputs": [],
+      "source": [
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "import matplotlib.pyplot as plt\n",
+        "import seaborn as sns\n",
+        "import scipy.stats as stats\n",
+        "from scipy.stats import ttest_1samp\n",
+        "from statsmodels.stats.power import tt_ind_solve_power"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "ages=[10,20,35,50,28,40,55,18,16,55,30,25,43,18,30,28,14,24,16,17,32,35,26,27,65,18,43,23,21,20,19,70]"
+      ],
+      "metadata": {
+        "id": "64ODJEW6vCQ0"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "ages_mean=np.mean(ages)\n",
+        "print(ages_mean)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "1GXLnF3NvHOk",
+        "outputId": "85404f89-7f5b-4b52-ff70-9e3eeeb369cd"
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "30.34375\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "sample_size=10\n",
+        "age_sample=np.random.choice(ages,sample_size)\n",
+        "age_sample"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "avZddre4vLk7",
+        "outputId": "05eb00ba-c191-4dfc-db31-2ec8cdd45f6d"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array([26, 50, 30, 30, 50, 65, 28, 25, 18, 16])"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 4
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from scipy.stats import ttest_1samp"
+      ],
+      "metadata": {
+        "id": "McAgDFE-vO68"
+      },
+      "execution_count": 8,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "ttest,p_value=ttest_1samp(age_sample,30)"
+      ],
+      "metadata": {
+        "id": "ScjyCHXqvhnR"
+      },
+      "execution_count": 10,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(p_value)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "N7MNFHV4vmlP",
+        "outputId": "14363347-9fff-4bac-b807-a51ed86a8801"
+      },
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "0.468187562733286\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "if p_value < 0.05:\n",
+        "    print(\"We are rejecting null hypothesis\")\n",
+        "else:\n",
+        "    print(\"We are accepting null hypothesis\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "40v7b43MvzBE",
+        "outputId": "df362a69-4a80-4912-adbb-9e292501a1d9"
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "We are accepting null hypothesis\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
